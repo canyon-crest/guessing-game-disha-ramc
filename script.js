@@ -1,13 +1,45 @@
 // add javascript here
 let answer = 0;
 let guessCount = 0;
+let range = 0;
+let startTime = 0;
 const scores = [];
+const roundTimes = [];
+
+function liveTime(){
+    let date = new Date();
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let month = monthNames[date.getMonth()];
+    let day = date.getDate();
+    if (day % 10 == 1 && day != 11){
+        day += "st";
+    }
+    else if (day % 10 == 2 && day != 12){
+        day += "nd";
+    }
+    else if (day % 10 == 3 && day !=13){
+        day += "rd";
+    }
+    else{
+        day += "th";
+    }
+    let year = date.getFullYear();
+    let currentTime = date.toLocaleTimeString();
+    document.getElementById("date").textContent = month + " " + day + ", " + year + ". Current Time: " + currentTime;
+}
+
+liveTime();
+setInterval(liveTime, 1000);
+
+let playerName = prompt("Enter your name: ").toLowerCase();
+playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1);
 
 document.getElementById("playBtn").addEventListener("click", play);
 document.getElementById("guessBtn").addEventListener("click", makeGuess);
+document.getElementById("giveUpBtn").addEventListener("click", giveUp);
 
 function play(){
-    let range = 0;
+    startTime = new Date().getTime();
     let levels = document.getElementsByName("level");
     for(let i=0; i<levels.length; i++){
         if(levels[i].checked){
