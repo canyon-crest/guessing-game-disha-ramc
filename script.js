@@ -47,7 +47,7 @@ function play(){
         }
         levels[i].disabled = true;
     }
-    document.getElementById("msg").textContent = "Hello," + playerName + "! Guess a number 1-" + range;
+    document.getElementById("msg").textContent = "Hello, " + playerName + "! Guess a number 1-" + range;
     answer = Math.floor(Math.random()*range) +1;
     guessCount = 0;
 
