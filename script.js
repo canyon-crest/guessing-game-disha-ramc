@@ -47,7 +47,7 @@ function play(){
         }
         levels[i].disabled = true;
     }
-    document.getElementById("msg").textContent = "Guess a number 1-" + range;
+    document.getElementById("msg").textContent = "Hello," + playerName + "! Guess a number 1-" + range;
     answer = Math.floor(Math.random()*range) +1;
     guessCount = 0;
 
@@ -60,23 +60,46 @@ function play(){
 function makeGuess(){
     let guess = parseInt(document.getElementById("guess").value);
     if(isNaN(guess)){
-        msg.textContent = "Please enter a valid number";
+        msg.textContent = playerName + ", please enter a valid number";
         return;
     }
     guessCount++;
     if(guess == answer){
-        msg.textContent = "Correct! It took " + guessCount + " tries.";
+        msg.textContent = "Correct! It took " + playerName + " " + guessCount + " tries.";
         updateScore(guessCount);
         resetGame();
     }
     else if(guess < answer){
-        msg.textContent = "Too low, try again.";
+        if (Math.abs(guess - answer) <= 2){
+            msg.textContent = "So close " + playerName + ", you're hot! But, too low, try again.";
+        }
+        else if (Math.abs(guess - answer) <= 5){
+            msg.textContent = "Almost there " + playerName + ", you're warm! But, too low, try again.";
+        }
+        else{
+            msg.textContent = "Not quite " + playerName + ", you're cold! Too low, try again.";
+        }
     }
     else{
-        msg.textContent = "Too high, try again.";
-    }
+        if (Math.abs(guess - answer) <= 2){
+            msg.textContent = "So close " + playerName + ", you're hot! But, too high, try again.";
+        }
+        else if (Math.abs(guess - answer) <= 5){
+            msg.textContent = "Almost there " + playerName + ", you're warm! But, too high, try again.";
+        }
+        else{
+            msg.textContent = "Not quite " + playerName + ", you're cold! Too high, try again.";
+        }
     
+    } 
 }
+
+
+function giveUp(){
+    updateScore(range);
+    resetGame();
+}
+
 
 function updateScore(score){
     scores.push(score);
@@ -95,6 +118,17 @@ function updateScore(score){
             lb[i].textContent = scores[i];
         }
     }
+
+    let endTime = new Date().getTime();
+    let gameTime = (endTime - startTime)/1000;
+    roundTimes.push(gameTime);
+
+    let fastestTime = Math.min(...roundTimes);
+    document.getElementById("fastest").textContent = "Fastest Game: " + fastestTime.toFixed(2);
+
+    let avgTime = (roundTimes.reduce((sum, time) => sum + time, 0))/roundTimes.length;
+    document.getElementById("avgTime").textContent = "Average Time: " + avgTime.toFixed(2);
+
 }
 function resetGame(){
     guess.value = "";
