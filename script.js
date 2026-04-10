@@ -139,3 +139,8 @@ function resetGame(){
     m.disabled = false;
     h.disabled = false;
 }
+
+document.getElementById("darkToggle").addEventListener("click", function() {
+  document.body.classList.toggle("dark");
+  this.textContent = document.body.classList.contains("dark") ? "☀️ Light mode" : "🌙 Dark mode";
+});

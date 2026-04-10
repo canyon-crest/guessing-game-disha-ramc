@@ -53,39 +53,33 @@ input[type="text"]:focus{
     border-radius: 0 8px 8px 0;
 }
 
-body.dark{
-    background: #1a0d12;
-    color: #fce8f0;
+body.dark {
+  background: #1a0d12;
+  color: #fce8f0;
 }
 
-body.dark h3{
-    color: #ed93b1;
+body.dark h3 { color: #ED93B1; }
+
+body.dark button { background: #72243E; }
+
+body.dark button:hover { background: #993556; }
+
+body.dark button:disabled {
+  background: #3a1f2a;
+  color: #c9869f;
+  cursor: default;
+  transform: none;
 }
 
-body.dark button{
-    background: #72243e;
+body.dark input[type="text"] {
+  background: #2a1520;
+  border-color: #6b3050;
+  color: #fce8f0;
 }
 
-body.dark button:hover{
-    background: #993556;
-}
+body.dark #msg { background: #2a1520; }
 
-body.dark button:disabled{
-    background: #3a1f2a;
-    color: #c9869f;
-    cursor: default;
-    transform: none;
-}
-
-body.dark input[type="text"]{
-    background: #2a1520;
-    border-color: #6b3050;
-    color: #fce8f0;
-}
-
-body.dark #msg{
-    background: #2a1520;
-}
+body.dark label { color: #fce8f0; }
 
 @keyframes shake{
     0%,100%{
